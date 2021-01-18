@@ -1,0 +1,117 @@
+body{
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #272727;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.login-form{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background-color: #272727;
+  height:100%;
+  width: 100vw;
+  padding-top: 24vh;
+}
+.form-label{
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 3vh;
+  margin-bottom: 8vh;
+}
+hr{
+background-color: #ffad00;
+border: none;
+height: 0.5vh;
+width: 35vw;
+margin-top: -5vh;
+margin-bottom: 5vh;
+}
+.input-label{
+  margin-top: 10%;
+  display: block;
+  font-size: 1.8vh;
+  height: 9vh;
+}
+.form-input{
+  color: white;
+  font-size: 1.7vh;
+  display: block;
+  position:relative;
+  width: 65vw;
+  height: 5vh;
+  margin: auto;
+  border-radius: 5px;
+  border: none;
+  background-color: #fff6e8;
+  border-bottom: solid 6px white;
+  background: none;
+}
+.send-button{
+  margin: auto;
+  font-size: 1.6vh;
+  margin-top: 15%;
+  border-radius: 8px;
+  border: none;
+  background-color: #ffad00;
+  color: white;
+  width: 30vw;
+  height: 5vh;
+}
+@keyframes test {
+  from{
+    position: fixed;
+    border-bottom: 60vh solid #ffad00;
+  	border-right: 1300vw solid transparent;
+  }
+  to{
+    top: 0;
+  }
+}
+@keyframes bottom{
+  from{
+    position: fixed;
+    border-bottom: 60vh solid #ffad00;
+    border-right: 1300vw solid transparent;
+  }
+  to{
+     bottom: 0;
+  }
+}
+
+.triangle-decoration-bottom{
+  z-index: 100;
+  animation-name: bottom;
+  animation-duration: 1.5s;
+  animation-fill-mode: both;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 0;
+	height: 0;
+	border-bottom: 20vh solid #ffad00;
+	border-right: 130vw solid transparent;
+}
+.triangle-decoration-top{
+  z-index: 100;
+  animation-name: test;
+  animation-duration: 1.5s;
+  animation-fill-mode: both;
+  overflow: hidden;
+  position: fixed;
+  transform: rotate(180deg);
+  top: 0;
+  right: 0;
+  width: 0;
+	height: 0;
+	border-bottom: 20vh solid #ffad00;
+	border-right: 130vw solid transparent;
+}
