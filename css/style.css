@@ -65,7 +65,7 @@ margin-bottom: 5vh;
   width: 30vw;
   height: 5vh;
 }
-@keyframes test {
+@keyframes slidetop {
   from{
     position: fixed;
     border-bottom: 60vh solid black;
@@ -75,7 +75,7 @@ margin-bottom: 5vh;
     top: 0;
   }
 }
-@keyframes bottom{
+@keyframes slidebottom{
   from{
     position: fixed;
     border-bottom: 60vh solid black;
@@ -86,30 +86,33 @@ margin-bottom: 5vh;
   }
 }
 
-.triangle-decoration-bottom{
-  z-index: 100;
-  animation-name: bottom;
-  animation-duration: 1.5s;
-  animation-fill-mode: both;
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 0;
-	height: 0;
-	border-bottom: 20vh solid #ffad00;
-	border-right: 130vw solid transparent;
-}
 .triangle-decoration-top{
   z-index: 100;
-  animation-name: test;
+  animation-name: slidetop;
   animation-duration: 1.5s;
+  animation-delay: 0.1s;
   animation-fill-mode: both;
   overflow: hidden;
   position: fixed;
   transform: rotate(180deg);
   top: 0;
   right: 0;
+  width: 0;
+	height: 0;
+	border-bottom: 20vh solid #ffad00;
+	border-right: 130vw solid transparent;
+}
+
+.triangle-decoration-bottom{
+  z-index: 100;
+  animation-name: slidebottom;
+  animation-duration: 1.5s;
+  animation-delay: 0.1s;
+  animation-fill-mode: both;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 0;
 	height: 0;
 	border-bottom: 20vh solid #ffad00;
