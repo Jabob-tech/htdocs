@@ -68,7 +68,7 @@ margin-bottom: 5vh;
 @keyframes test {
   from{
     position: fixed;
-    border-bottom: 60vh solid #ffad00;
+    border-bottom: 60vh solid black;
   	border-right: 1300vw solid transparent;
   }
   to{
@@ -78,7 +78,7 @@ margin-bottom: 5vh;
 @keyframes bottom{
   from{
     position: fixed;
-    border-bottom: 60vh solid #ffad00;
+    border-bottom: 60vh solid black;
     border-right: 1300vw solid transparent;
   }
   to{
