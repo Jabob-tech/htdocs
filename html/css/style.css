@@ -1,4 +1,4 @@
-body{
+body {
   font-family: 'Roboto', sans-serif;
   display: flex;
   justify-content: center;
@@ -9,7 +9,7 @@ body{
   overflow: hidden;
 }
 
-.login-form{
+.login-form {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -19,14 +19,14 @@ body{
   width: 100vw;
   padding-top: 24vh;
 }
-.form-label{
+.form-label {
   display: block;
   text-align: center;
   font-weight: bold;
   font-size: 3vh;
   margin-bottom: 8vh;
 }
-hr{
+hr {
 background-color: #ffad00;
 border: none;
 height: 0.5vh;
@@ -34,13 +34,13 @@ width: 35vw;
 margin-top: -5vh;
 margin-bottom: 5vh;
 }
-.input-label{
+.input-label {
   margin-top: 10%;
   display: block;
   font-size: 1.8vh;
   height: 9vh;
 }
-.form-input{
+.form-input {
   color: white;
   font-size: 1.7vh;
   display: block;
@@ -54,7 +54,7 @@ margin-bottom: 5vh;
   border-bottom: solid 6px white;
   background: none;
 }
-.send-button{
+.send-button {
   margin: auto;
   font-size: 1.6vh;
   margin-top: 15%;
@@ -75,17 +75,17 @@ margin-bottom: 5vh;
     top: 0;
   }
 }
-@keyframes slidebottom{
-  from{
+@keyframes slidebottom {
+  from {
     position: fixed;
     border-bottom: 60vh solid black;
     border-right: 1300vw solid transparent;
   }
-  to{
+  to {
      bottom: 0;
   }
 }
-.triangle-decoration-top{
+.triangle-decoration-top {
   z-index: 100;
   animation-name: slidetop;
   animation-duration: 1.5s;
@@ -102,7 +102,7 @@ margin-bottom: 5vh;
 	border-right: 130vw solid transparent;
 }
 
-.triangle-decoration-bottom{
+.triangle-decoration-bottom {
   z-index: 100;
   animation-name: slidebottom;
   animation-duration: 1.5s;
