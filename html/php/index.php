@@ -6,7 +6,8 @@
   </head>
   <body>
     <?php
-    echo "Hello World!";
+    $var = "Hello World!";
+    echo "$var, to znaczy Witaj Świecie!";
      ?>
   </body>
 </html>
