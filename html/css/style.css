@@ -85,7 +85,6 @@ margin-bottom: 5vh;
      bottom: 0;
   }
 }
-
 .triangle-decoration-top{
   z-index: 100;
   animation-name: slidetop;
