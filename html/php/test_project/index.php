@@ -5,14 +5,15 @@
     <title>Strona logowania</title>
   </head>
   <body>
-    <form action="order.php" method="post">
+    <form action="sign.php" method="post">
       <h1 class="form-label">Zaloguj się</h1><hr>
       <label for="email" class="input-label">Nazwa użytkownika lub email <br><br>
-        <input type="text" name="email" value="" placeholder="email" class="form-input" required>
-      </label>
+        <input type="text" name="login_input" placeholder="login" class="form-input" required>
+      </label><br><br>
       <label for="password" class="input-label">Hasło <br><br>
-        <input type="password" name="password" placeholder="hasło"class="form-input" required>
+        <input type="password" name="password_input" placeholder="hasło" class="form-input" required>
       </label>
+      <br><br>
       <button type="submit" name="send-button" value="" class="send-button">zaloguj się</button>
     </form>
   </body>
