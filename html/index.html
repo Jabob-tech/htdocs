@@ -12,13 +12,13 @@
 
 <section class="login-form">
   <div class="triangle-decoration-top"></div>
-  <form action="" method="post">
+  <form action="order.php" method="post">
     <h1 class="form-label">Zaloguj się</h1><hr>
     <label for="email" class="input-label">Nazwa użytkownika lub email <br><br>
-      <input type="email" name="email" value="" placeholder="email" class="form-input">
+      <input type="text" name="email" value="" placeholder="email" class="form-input" required>
     </label>
     <label for="password" class="input-label">Hasło <br><br>
-      <input type="password" name="password" placeholder="hasło"class="form-input">
+      <input type="password" name="password" placeholder="hasło"class="form-input"  required>
     </label>
     <input type="submit" name="send-button" value="zaloguj się" class="send-button">
   </form>
