@@ -1,6 +1,6 @@
 <?php
   session_start();
-  if (isset($_SESSION['logged_in'] && ($_SESSION['logged_in'] == true))) {
+  if ((isset($_SESSION['signed_in'])) && ($_SESSION['signed_in']==true)) {
     header('Location: profil.php');
     exit();
   }
