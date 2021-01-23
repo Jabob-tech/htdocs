@@ -16,7 +16,9 @@
   if($result = @$connection -> query($sql)) {
     $how_many_users = $result -> num_rows;
     if ($how_many_users>0) {
+      $_SESSION['signed_id'] = true;
       $record = $result ->fetch_assoc();
+      $_SESSION['id'] = $record['id'];
       $_SESSION['username'] = $record['username'];
       $_SESSION['first_name'] = $record['first_name'];
       $_SESSION['second_name'] = $record['second_name'];
