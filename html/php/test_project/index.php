@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pl" dir="ltr">
   <head>
@@ -16,5 +20,11 @@
       <br><br>
       <button type="submit" name="send-button" value="" class="send-button">zaloguj się</button>
     </form>
+    <br>
+    <?php
+    if(isset($_SESSION['error'])) {
+    echo $_SESSION['error'];
+    }
+    ?>
   </body>
 </html>

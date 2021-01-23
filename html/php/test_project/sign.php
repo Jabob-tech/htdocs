@@ -18,12 +18,17 @@
     if ($how_many_users>0) {
       $record = $result ->fetch_assoc();
       $_SESSION['username'] = $record['username'];
-      header('Location: profil.php');
+      $_SESSION['first_name'] = $record['first_name'];
+      $_SESSION['second_name'] = $record['second_name'];
+      $_SESSION['email'] = $record['e-mail'];
 
-
+      unset($_SESSION['error']);
       $result -> close();
+      header('Location: profil.php');
     }
     else {
+      $_SESSION['error'] = '<span style="color:red">Nieprawidłowy login lub hasło</span>';
+      header('Location: index.php');
     }
   }
 
