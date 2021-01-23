@@ -1,5 +1,6 @@
 <?php
   //this file handles signing in
+  session_start();
   require_once "connect.php";
 
   $connection = @new mysqli($host, $db_user, $db_password, $db_name);
@@ -16,6 +17,11 @@
     $how_many_users = $result -> num_rows;
     if ($how_many_users>0) {
       $record = $result ->fetch_assoc();
+      $_SESSION['username'] = $record['username'];
+      header('Location: profil.php');
+
+
+      $result -> close();
     }
     else {
     }
