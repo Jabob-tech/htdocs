@@ -1,9 +1,8 @@
 <?php
   //this file handles signing in
   session_start();
-  if ((!isset($_POST['login'])) || (!isset($_POST['password']))) {
+  if(!isset($_SESSION['signed_in'])){
     header('Location: index.php');
-    exit();
   }
   require_once "connect.php";
 

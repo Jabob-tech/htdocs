@@ -1,8 +1,7 @@
 <?php
   session_start();
-  if ((!isset($_SESSION['signed_in'])) && ($_SESSION['signed_in']==false)) {
+  if(!isset($_SESSION['signed_in'])){
     header('Location: index.php');
-    exit();
   }
 ?>
 <!DOCTYPE html>
