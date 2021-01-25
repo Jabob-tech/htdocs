@@ -14,6 +14,9 @@
   else {
     $login = $_POST['login_input'];
     $password = $_POST['password_input'];
+
+    $login = htmlentities($login, ENT_QUOTES, "UTF-8");
+    $password = htmlentities($password, ENT_QUOTES, "UTF-8");
     $sql = "SELECT * FROM users WHERE username ='$login' AND password='$password'";
 
   if($result = @$connection -> query($sql)) {
