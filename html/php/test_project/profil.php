@@ -16,7 +16,8 @@
 echo "<p>Witaj ".$_SESSION['username'].'! [<a href="logout.php">Wyloguj się</a>]</p>';
 echo "<p><b>Imię</b>: ".$_SESSION['first_name']." ";
 echo "<b>Nazwisko</b>: ".$_SESSION['second_name']."</p>";
-echo "<p><b>e-mail</b>: ".$_SESSION['email'];
+echo "<p><b>e-mail: </b> ".$_SESSION['email'];
+echo "<p><b>Data urodzenia: </b>" .$_SESSION['birthdate'];
 
  ?>
   </body>
