@@ -37,6 +37,24 @@ session_start();
 
     //checking password
     $password = $_POST['password'];
+    $password_repeat = $_POST['password_repeat'];
+    $password_lenght = strlen($password);
+    switch ($password_lenght) {
+
+      case ($password_lenght<8):
+        $_SESSION['e_password'] = "Hasło musi składać się z co najmniej 8 znaków";
+        echo $_SESSION['e_password'];
+        break;
+
+      case ($password_lenght>20):
+        $_SESSION['e_password'] = "Hasło może mieć maksymalnie 20 znaków";
+        echo $_SESSION['e_password'];
+        break;
+    }
+    if($password !== $password_repeat) {
+      $_SESSION['e_password'] = "Hasła nie są takie same";
+      echo $_SESSION['e_password'];
+    }
     if ($all_data_ok == true) {
       //All data ok, adding user to database
       echo "Dziękujemy za rejestrację w naszym serwisie!";
@@ -93,7 +111,7 @@ body{
   ?><br>
 
   <label for="email" class="registration-form__input-label">E-mail</label><br>
-  <input type="text" name="email" value="" class="registration-form__input" placeholder="E-mail" required><br><br>
+  <input type="email" name="email" value="" class="registration-form__input" placeholder="E-mail" required><br><br>
 
   <label for="date_of_birth" class="registration-form__input-label">Data urodzenia</label><br>
   <input type="date" name="date_of_birth" value="" class="registration-form__input" placeholder="Data urodzenia" required><br><br>
@@ -102,7 +120,7 @@ body{
   <input type="text" name="username" value="" class="registration-form__input" placeholder="Nazwa używkownika" required><br>
 
   <?php if (isset($_SESSION['e_username'])) {
-      echo '<div class="registration-form__error">'.$_SESSION['e_nickname'].'</div>';
+      echo '<div class="registration-form__error">'.$_SESSION['e_username'].'</div>';
       unset($_SESSION['e_username']);
       }
   ?><br>
@@ -113,6 +131,11 @@ body{
   <label for="password_repeat" class="registration-form__input-label">Powtórz hasło</label><br>
   <input type="password" name="password_repeat" value="" class="registration-form__input" placeholder="Powtórz hasło" required><br><br>
 
+  <?php if (isset($_SESSION['e_password'])) {
+      echo '<div class="registration-form__error">'.$_SESSION['e_password'].'</div>';
+      unset($_SESSION['e_password']);
+      }
+  ?>
   <input type="checkbox" name="statute_accept" id="statute_accept">
   <label for="statute_accept">Akceptuję regulamin</label><br><br>
    <div class="g-recaptcha" data-sitekey="6Lc1qj4aAAAAAO65CiyQpISrD-vP3sVgW_kOEYci"></div>
