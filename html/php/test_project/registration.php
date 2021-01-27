@@ -28,11 +28,11 @@ session_start();
     $username = $_POST['username'];
     if((strlen($username)<3) || (strlen($username)>20)) {
       $all_data_ok = false;
-      $_SESSION['e_nickname'] = "Nazwa użytkownika może mieć od 3 do 20 liter";
+      $_SESSION['e_username'] = "Nazwa użytkownika może mieć od 3 do 20 liter";
     }
     if (ctype_alnum($username) == false) {
       $all_data_ok = false;
-      $_SESSION['e_nickname'] = "Nazwa użytkownika może składać się tylko z liter i cyfr";
+      $_SESSION['e_username'] = "Nazwa użytkownika może składać się tylko z liter i cyfr";
     }
 
     //checking password
@@ -101,9 +101,9 @@ body{
   <label for="username" class="registration-form__input-label">Nazwa użytkownika</label><br>
   <input type="text" name="username" value="" class="registration-form__input" placeholder="Nazwa używkownika" required><br>
 
-  <?php if (isset($_SESSION['e_nickname'])) {
+  <?php if (isset($_SESSION['e_username'])) {
       echo '<div class="registration-form__error">'.$_SESSION['e_nickname'].'</div>';
-      unset($_SESSION['e_nickname']);
+      unset($_SESSION['e_username']);
       }
   ?><br>
 
