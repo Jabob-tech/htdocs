@@ -32,6 +32,8 @@ session_start();
     $password = $_POST['password'];
     if ($all_data_ok == true) {
       //All data ok, adding user to database
+      echo "Dziękujemy za rejestrację w naszym serwisie!";
+      exit();
     }
   }
 ?>
@@ -72,16 +74,16 @@ body{
     echo '<div class="registration-form__error">'.$_SESSION['e_first_name'].'</div>';
     unset($_SESSION['e_first_name']);
     }
-?><br><br>
+?><br>
 
   <label for="second_name" class="registration-form__input-label">Nazwisko</label><br>
-  <input type="text" name="second_name" value="" class="registration-form__input" placeholder="Nazwisko" required><br><br>
+  <input type="text" name="second_name" value="" class="registration-form__input" placeholder="Nazwisko" required><br>
 
   <?php if (isset($_SESSION['e_second_name'])) {
       echo '<div class="registration-form__error">'.$_SESSION['e_second_name'].'</div>';
-      unset($_SESSION['e_first_name']);
+      unset($_SESSION['e_second_name']);
       }
-  ?><br><br>
+  ?><br>
 
   <label for="email" class="registration-form__input-label">E-mail</label><br>
   <input type="text" name="email" value="" class="registration-form__input" placeholder="E-mail" required><br><br>
@@ -90,13 +92,13 @@ body{
   <input type="date" name="date_of_birth" value="" class="registration-form__input" placeholder="Data urodzenia" required><br><br>
 
   <label for="username" class="registration-form__input-label">Nazwa użytkownika</label><br>
-  <input type="text" name="username" value="" class="registration-form__input" placeholder="Nazwa używkownika" required><br><br>
+  <input type="text" name="username" value="" class="registration-form__input" placeholder="Nazwa używkownika" required><br>
 
   <?php if (isset($_SESSION['e_nickname'])) {
       echo '<div class="registration-form__error">'.$_SESSION['e_nickname'].'</div>';
-      unset($_SESSION['e_nicknamee']);
+      unset($_SESSION['e_nickname']);
       }
-  ?><br><br>
+  ?><br>
 
   <label for="password" class="registration-form__input-label">Hasło</label><br>
   <input type="text" name="password" value="" class="registration-form__input" placeholder="Hasło" required><br><br>
