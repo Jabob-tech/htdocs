@@ -12,9 +12,9 @@
     <meta charset="utf-8">
     <title>Strona logowania</title>
   </head>
-  <body>
+  <html>
     <form action="sign.php" method="post">
-      <h1 class="form-label">Zaloguj się</h1><hr>
+      <h1 class="form-label">Zaloguj się/<a href="registration.php">Zarejestruj się</a></h1><hr>
       <label for="email" class="input-label">Nazwa użytkownika lub email <br><br>
         <input type="text" name="login_input" placeholder="login" class="form-input" required>
       </label><br><br>
@@ -30,5 +30,5 @@
     echo $_SESSION['error'];
     }
     ?>
-  </body>
+  </html>
 </html>

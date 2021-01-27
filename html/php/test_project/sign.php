@@ -1,7 +1,7 @@
 <?php
   //this file handles signing in
   session_start();
-  if(!isset($_SESSION['signed_in'])){
+  if(!isset($_SESSION['signed_in'])) {
     header('Location: index.php');
   }
   require_once "connect.php";
