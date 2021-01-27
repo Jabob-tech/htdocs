@@ -11,6 +11,7 @@ session_start();
       $all_data_ok = false;
       $_SESSION['e_first_name'] = "Wpisane imię może mieć od 3 do 16 liter";
     }
+
     //checking second_name
     $second_name = $_POST['second_name'];
     if((strlen($second_name)<2) || (strlen($second_name)>20)) {
@@ -22,12 +23,18 @@ session_start();
 
     //checking date_of_birth
     $date_of_birth = $_POST['date_of_birth'];
+
     //checking username
     $username = $_POST['username'];
     if((strlen($username)<3) || (strlen($username)>20)) {
       $all_data_ok = false;
       $_SESSION['e_nickname'] = "Nazwa użytkownika może mieć od 3 do 20 liter";
     }
+    if (ctype_alnum($username) == false) {
+      $all_data_ok = false;
+      $_SESSION['e_nickname'] = "Nazwa użytkownika może składać się tylko z liter i cyfr";
+    }
+
     //checking password
     $password = $_POST['password'];
     if ($all_data_ok == true) {
@@ -101,7 +108,7 @@ body{
   ?><br>
 
   <label for="password" class="registration-form__input-label">Hasło</label><br>
-  <input type="text" name="password" value="" class="registration-form__input" placeholder="Hasło" required><br><br>
+  <input type="password" name="password" value="" class="registration-form__input" placeholder="Hasło" required><br><br>
 
   <label for="password_repeat" class="registration-form__input-label">Powtórz hasło</label><br>
   <input type="password" name="password_repeat" value="" class="registration-form__input" placeholder="Powtórz hasło" required><br><br>
