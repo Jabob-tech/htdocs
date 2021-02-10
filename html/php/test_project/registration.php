@@ -61,6 +61,14 @@ session_start();
       $all_data_ok = false;
       $_SESSION['e_statute'] = "Akceptacja regulaminu wymagana";
     }
+    //reCAPTCHA validation
+    $reCAPTCHA_Secret_Key = "6Lc1qj4aAAAAAK1BBYX9jgxsbvAzSgf9X_p2ic_R";
+    $check = file_get_contents('https://google.com/recaptcha/api/siteverify?secret='.$reCAPTCHA_Secret_Key.'&response='.$_POST['g-recaptcha-response']);
+    $answer = json_decode($check);
+    if ($answer->success !== true) {
+      $_SESSION['e_recaptcha'] = "Wymagane potwierdzenie reCAPTCHA ";
+      echo $_SESSION['e_recaptcha'];
+    }
     if ($all_data_ok == true) {
       //All data ok, adding user to database
       echo "Dziękujemy za rejestrację w naszym serwisie!";
@@ -150,6 +158,11 @@ body{
       }
   ?><br>
    <div class="g-recaptcha" data-sitekey="6Lc1qj4aAAAAAO65CiyQpISrD-vP3sVgW_kOEYci"></div>
+   <?php if (isset($_SESSION['e_recaptcha'])) {
+       echo '<div class="registration-form__error">'.$_SESSION['e_recaptcha'].'</div>';
+       unset($_SESSION['e_recaptcha']);
+       }
+   ?><br>
   <button type="password" name="button" class="registration-form__button registration-form__button--active">Zarejestruj się</button>
 </form>
   </body>
