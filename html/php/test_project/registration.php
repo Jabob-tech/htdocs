@@ -42,18 +42,24 @@ session_start();
     switch ($password_lenght) {
 
       case ($password_lenght<8):
-        $_SESSION['e_password'] = "Hasło musi składać się z co najmniej 8 znaków";
+        $_SESSION['e_password'] = "Hasło musi składać się z co najmniej 8 znaków ";
         echo $_SESSION['e_password'];
         break;
 
       case ($password_lenght>20):
-        $_SESSION['e_password'] = "Hasło może mieć maksymalnie 20 znaków";
+        $_SESSION['e_password'] = "Hasło może mieć maksymalnie 20 znaków ";
         echo $_SESSION['e_password'];
         break;
     }
     if($password !== $password_repeat) {
-      $_SESSION['e_password'] = "Hasła nie są takie same";
+      $_SESSION['e_password'] = "Hasła nie są takie same ";
       echo $_SESSION['e_password'];
+    }
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+    if (!isset($_POST['statute_accept'])){
+      $all_data_ok = false;
+      $_SESSION['e_statute'] = "Akceptacja regulaminu wymagana";
     }
     if ($all_data_ok == true) {
       //All data ok, adding user to database
@@ -138,6 +144,11 @@ body{
   ?>
   <input type="checkbox" name="statute_accept" id="statute_accept">
   <label for="statute_accept">Akceptuję regulamin</label><br><br>
+  <?php if (isset($_SESSION['e_statute'])) {
+      echo '<div class="registration-form__error">'.$_SESSION['e_statute'].'</div>';
+      unset($_SESSION['e_statute']);
+      }
+  ?><br>
    <div class="g-recaptcha" data-sitekey="6Lc1qj4aAAAAAO65CiyQpISrD-vP3sVgW_kOEYci"></div>
   <button type="password" name="button" class="registration-form__button registration-form__button--active">Zarejestruj się</button>
 </form>
