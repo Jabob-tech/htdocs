@@ -62,7 +62,7 @@ session_start();
       $_SESSION['e_statute'] = "Akceptacja regulaminu wymagana";
     }
     //reCAPTCHA validation
-    $reCAPTCHA_Secret_Key = "6Lc1qj4aAAAAAK1BBYX9jgxsbvAzSgf9X_p2ic_R";
+    $reCAPTCHA_Secret_Key = "";
     $check = file_get_contents('https://google.com/recaptcha/api/siteverify?secret='.$reCAPTCHA_Secret_Key.'&response='.$_POST['g-recaptcha-response']);
     $answer = json_decode($check);
     if ($answer->success !== true) {
