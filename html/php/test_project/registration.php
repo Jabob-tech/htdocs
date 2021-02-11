@@ -43,17 +43,14 @@ session_start();
 
       case ($password_lenght<8):
         $_SESSION['e_password'] = "Hasło musi składać się z co najmniej 8 znaków ";
-        echo $_SESSION['e_password'];
         break;
 
       case ($password_lenght>20):
         $_SESSION['e_password'] = "Hasło może mieć maksymalnie 20 znaków ";
-        echo $_SESSION['e_password'];
         break;
     }
     if($password !== $password_repeat) {
       $_SESSION['e_password'] = "Hasła nie są takie same ";
-      echo $_SESSION['e_password'];
     }
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
@@ -62,13 +59,25 @@ session_start();
       $_SESSION['e_statute'] = "Akceptacja regulaminu wymagana";
     }
     //reCAPTCHA validation
-    $reCAPTCHA_Secret_Key = "";
+    $reCAPTCHA_Secret_Key = "6Lc1qj4aAAAAAK1BBYX9jgxsbvAzSgf9X_p2ic_R";
     $check = file_get_contents('https://google.com/recaptcha/api/siteverify?secret='.$reCAPTCHA_Secret_Key.'&response='.$_POST['g-recaptcha-response']);
     $answer = json_decode($check);
     if ($answer->success !== true) {
+      $all_data_ok = false;
       $_SESSION['e_recaptcha'] = "Wymagane potwierdzenie reCAPTCHA ";
-      echo $_SESSION['e_recaptcha'];
     }
+
+    require_once "connect.php";
+
+    try {
+        $connection = new mysqli($host, $db_user, $db_password, $db_name);
+    } catch (Exception $e) {
+      echo 'Wystąpił problem z serwerem. Spróbuj zarejestrować się później';
+      echo $e;
+
+    }
+
+
     if ($all_data_ok == true) {
       //All data ok, adding user to database
       echo "Dziękujemy za rejestrację w naszym serwisie!";
