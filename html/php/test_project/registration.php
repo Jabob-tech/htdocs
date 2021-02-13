@@ -53,7 +53,7 @@ session_start();
       $_SESSION['e_password'] = "Hasła nie są takie same ";
     }
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
-
+    //checking statute acceptation
     if (!isset($_POST['statute_accept'])){
       $all_data_ok = false;
       $_SESSION['e_statute'] = "Akceptacja regulaminu wymagana";
@@ -66,17 +66,32 @@ session_start();
       $all_data_ok = false;
       $_SESSION['e_recaptcha'] = "Wymagane potwierdzenie reCAPTCHA ";
     }
-
+    //requiring file with data needed to connect with database
     require_once "connect.php";
-
+    mysqli_report(MYSQLI_REPORT_STRICT);
+    //trying connection to database
     try {
         $connection = new mysqli($host, $db_user, $db_password, $db_name);
+        if($connection ->connect_errno!=0) {
+          throw new Exception(mysqli_connect_errno());
+        }else {
+            //checking if email is in database
+            $result  = $connection->query("SELECT id FROM users WHERE email='$email'");
+            if (!$result) throw new Exception($connection->error);
+            $email_quantity = $result->num_rows;
+            if ($email_quantity>0) {
+              $all_data_ok = false;
+              $_SESSION['e_email'] = "Istnieje konto przypisane do tego adresu email";
+              }
+
+            $connection -> close();
+        }
     } catch (Exception $e) {
-      echo 'Wystąpił problem z serwerem. Spróbuj zarejestrować się później';
-      echo $e;
+      echo '<span style="color: red">Wystąpił problem z serwer em. Spróbuj zarejestrować się później</span>';
+      //information only for development
+      //echo $e;
 
     }
-
 
     if ($all_data_ok == true) {
       //All data ok, adding user to database
@@ -135,7 +150,11 @@ body{
 
   <label for="email" class="registration-form__input-label">E-mail</label><br>
   <input type="email" name="email" value="" class="registration-form__input" placeholder="E-mail" required><br><br>
-
+  <?php if (isset($_SESSION['e_email'])) {
+      echo '<div class="registration-form__error">'.$_SESSION['e_email'].'</div>';
+      unset($_SESSION['e_email']);
+      }
+  ?><br>
   <label for="date_of_birth" class="registration-form__input-label">Data urodzenia</label><br>
   <input type="date" name="date_of_birth" value="" class="registration-form__input" placeholder="Data urodzenia" required><br><br>
 
