@@ -66,6 +66,13 @@ session_start();
       $all_data_ok = false;
       $_SESSION['e_recaptcha'] = "Wymagane potwierdzenie reCAPTCHA ";
     }
+    //Remember data in form
+    $_SESSION['rf_first_name'] = $first_name;
+    $_SESSION['rf_second_name'] = $second_name;
+    $_SESSION['rf_email'] = $email;
+    $_SESSION['rf_date_of_birth'] = $date_of_birth;
+    $_SESSION['rf_username'] = $username;
+    if (!isset($_POST['statute_accept'])) $_SESSION['rf_statute_accept'] = true;
     //requiring file with data needed to connect with database
     require_once "connect.php";
     mysqli_report(MYSQLI_REPORT_STRICT);
@@ -83,20 +90,33 @@ session_start();
               $all_data_ok = false;
               $_SESSION['e_email'] = "Istnieje konto przypisane do tego adresu email";
               }
+              //checking if nickname is in database
+            $result  = $connection->query("SELECT id FROM users WHERE username='$username'");
+            if (!$result) throw new Exception($connection->error);
+            $username_quantity = $result->num_rows;
+            if ($email_quantity>0) {
+              $all_data_ok = false;
+              $_SESSION['e_username'] = "Istnieje już użytkownik o takim nicku";
+              }
+
+            if ($all_data_ok == true) {
+              //All data ok, adding user to database
+                if ($connection->query("INSERT INTO users VALUES (NULL, '$first_name', '$second_name', '$email', '$date_of_birth', '$username', '$password_hash')" )) {
+                  $_SESSION['successful_registration'] = true;
+                  header('Location: welcome.php');
+                }
+                else {
+                  throw new Exception($connection->error);
+                }
+              exit();
 
             $connection -> close();
         }
-    } catch (Exception $e) {
-      echo '<span style="color: red">Wystąpił problem z serwer em. Spróbuj zarejestrować się później</span>';
+    }
+    }catch (Exception $e) {
+      echo '<span style="color: red">Wystąpił problem z serwerem. Spróbuj zarejestrować się później</span>';
       //information only for development
       //echo $e;
-
-    }
-
-    if ($all_data_ok == true) {
-      //All data ok, adding user to database
-      echo "Dziękujemy za rejestrację w naszym serwisie!";
-      exit();
     }
   }
 ?>
@@ -131,7 +151,10 @@ body{
   <h1>Zarejestruj się</h1><hr>
 
   <label for="first_name" class="registration-form__input-label">Imię</label><br>
-  <input type="text" name="first_name" value="" class="registration-form__input" placeholder="Imię" required>
+  <input type="text" name="first_name" value="<?php if (isset($_SESSION['first_name'])) {
+    echo $_SESSION['rf_first_name'];
+    unset($_SESSION['rf_first_name']);
+  }?>" class="registration-form__input" placeholder="Imię" required>
 
 <?php if (isset($_SESSION['e_first_name'])) {
     echo '<div class="registration-form__error">'.$_SESSION['e_first_name'].'</div>';
@@ -140,7 +163,10 @@ body{
 ?><br>
 
   <label for="second_name" class="registration-form__input-label">Nazwisko</label><br>
-  <input type="text" name="second_name" value="" class="registration-form__input" placeholder="Nazwisko" required><br>
+  <input type="text" name="second_name" value="<?php if (isset($_SESSION['second_name'])) {
+    echo $_SESSION['fr_second_name'];
+    unset($_SESSION['fr_second_name']);
+  }?>" class="registration-form__input" placeholder="Nazwisko" required><br>
 
   <?php if (isset($_SESSION['e_second_name'])) {
       echo '<div class="registration-form__error">'.$_SESSION['e_second_name'].'</div>';
@@ -149,14 +175,20 @@ body{
   ?><br>
 
   <label for="email" class="registration-form__input-label">E-mail</label><br>
-  <input type="email" name="email" value="" class="registration-form__input" placeholder="E-mail" required><br><br>
+  <input type="email" name="email" value="<?php if (isset($_SESSION['email'])) {
+    echo $_SESSION['rf_email'];
+    unset($_SESSION['rf_email']);
+  }?>" class="registration-form__input" placeholder="E-mail" required><br><br>
   <?php if (isset($_SESSION['e_email'])) {
       echo '<div class="registration-form__error">'.$_SESSION['e_email'].'</div>';
       unset($_SESSION['e_email']);
       }
   ?><br>
   <label for="date_of_birth" class="registration-form__input-label">Data urodzenia</label><br>
-  <input type="date" name="date_of_birth" value="" class="registration-form__input" placeholder="Data urodzenia" required><br><br>
+  <input type="date" name="date_of_birth" value="<?php if (isset($_SESSION['rf_date_of_birth'])) {
+    echo $_SESSION['rf_date_of_birth'];
+    unset($_SESSION['rf_date_of_birth']);
+  }?>" class="registration-form__input" placeholder="Data urodzenia" required><br><br>
 
   <label for="username" class="registration-form__input-label">Nazwa użytkownika</label><br>
   <input type="text" name="username" value="" class="registration-form__input" placeholder="Nazwa używkownika" required><br>
@@ -178,7 +210,12 @@ body{
       unset($_SESSION['e_password']);
       }
   ?>
-  <input type="checkbox" name="statute_accept" id="statute_accept">
+  <input type="checkbox" name="statute_accept" id="statute_accept" <?php
+  if (isset($_SESSION['rf_statute_accept'])) {
+    echo "checked";
+    unset($_SESSION['rf_statute_accept']);
+  }
+  ?>>
   <label for="statute_accept">Akceptuję regulamin</label><br><br>
   <?php if (isset($_SESSION['e_statute'])) {
       echo '<div class="registration-form__error">'.$_SESSION['e_statute'].'</div>';

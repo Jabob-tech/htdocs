@@ -29,7 +29,7 @@
         $_SESSION['username'] = $record['username'];
         $_SESSION['first_name'] = $record['first_name'];
         $_SESSION['second_name'] = $record['second_name'];
-        $_SESSION['email'] = $record['e-mail'];
+        $_SESSION['email'] = $record['email'];
         $_SESSION['birthdate'] = $record['date_of_birth'];
 
         unset($_SESSION['error']);
